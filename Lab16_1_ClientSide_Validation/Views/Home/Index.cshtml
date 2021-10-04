@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .warning{
+        color: red;
+        font-weight: bold;
+    }
+
+</style>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<form id="regform" method="post" action="/home/confirmed">
+    <label>First Name:</label><input type="text" name="firstname" id="firstnametext" />
+    <span id="fnwarn" class="warning"></span><br />
+    <label>Last Name:</label><input type="text" name="lastname" id="lastnametext" />
+    <span id="lnwarn" class="warning"></span><br /><br />
+    <label>Email:</label><input type="email" name="email" id="email" />
+    <span id="emwarn" class="warning"></span><br /><br />
+    <label>Password:</label><input type="password" name="password" id="pass1text" />
+    <span id="p1warn" class="warning"></span><br /><br />
+    <label>Re-enter Password:</label><input type="password" name="confirmpass" id="pass2text" />
+    <span id="p2warn" class="warning"></span><br /><br />
+
+</form>
+<button id="regbutton">Submit</button>
+
+
+<script>
+    function ProcessForm() {
+        let fn = document.querySelector('#firstnametext').value;
+        let ln = document.querySelector('#lastnametext').value;
+        let email = document.querySelector('#email').value;
+        let pass1 = document.querySelector('#pass1text').value;
+        let pass2 = document.querySelector('#pass2text').value;
+
+        if (!fn) {
+            document.querySelector('#fnwarn').innerText = 'Please fill in your first name'
+        }
+        if (!ln) {
+            document.querySelector('#lnwarn').innerText = 'Please fill in your last name'
+        }
+        if (!email) {
+            document.querySelector('#emwarn').innerText = 'Please fill in your email'
+        }
+        if (!pass1) {
+            document.querySelector('#p1warn').innerText = 'Please enter a password'
+        }
+        if (!pass2) {
+            document.querySelector('#p2warn').innerText = 'Please verify your password'
+        }
+        else if (pass2 != pass1) {
+            document.querySelector('#p2warn').innerText = 'Passwords do not match'
+        }
+        else {
+            document.querySelector('#regform').submit();
+        }
+    }
+
+    //function ClearPass2Warning() {
+    //    document.querySelector('#p2warn').innerText = '';
+    //}
+
+    //let clrPass2Warn = document.querySelector('#pass2text');
+    //clrPass2Warn.addEventListener('keypress', ClearWarning);
+
+
+
+    let processClick = document.querySelector('#regbutton');
+    processClick.addEventListener('click', ProcessForm);
+</script>
